@@ -20,35 +20,35 @@ public class RegistrationController {
 		this.registrationService = registrationService;
 	}
 
-	@GetMapping("/patients")
+	@GetMapping("/users")
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_PATIENT')")
-	public List<Patient> getPatients() {
-		return registrationService.getPatients();
+	public List<User> getUsers() {
+		return registrationService.getUsers();
 	}
 
 	//seyon/user?id=101
-	@GetMapping("/patient/{id}")
+	@GetMapping("/user/{id}")
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_PATIENT')")
-	public Patient getPatients(@RequestParam String id, @PathVariable("patient") String patient) {
-		return registrationService.getPatient(id);
+	public Patient getUser(@RequestParam String id, @PathVariable("user") String user) {
+		return registrationService.getUser(id);
 	}
 	
-	@PostMapping("/patient/save")
+	@PostMapping("/user/save")
 	@PreAuthorize("hasAuthority('patient:write')")
-	public void savePatient(@RequestBody Patient patient) {
-		registrationService.savePatient(patient);
+	public void savePatient(@RequestBody User user) {
+		registrationService.saveUser(user);
 	}
 
-	@PutMapping("/patient/update/{id}")
+	@PutMapping("/user/update/{id}")
 	@PreAuthorize("hasAuthority('patient:write')")
-	public void savePatient(@RequestParam String id, @RequestBody Patient patient) {
-		registrationService.updatePatient(patient);
+	public void savePatient(@RequestParam String id, @RequestBody User user) {
+		registrationService.updateUser(user);
 	}
 
-	@DeleteMapping("/patient/delete/{id}")
+	@DeleteMapping("/user/delete/{id}")
 	@PreAuthorize("hasAuthority('patient:write')")
 	public void savePatient(@RequestParam String id ) {
-		registrationService.deletePatient(id);
+		registrationService.deleteUser(id);
 	}
 	
 

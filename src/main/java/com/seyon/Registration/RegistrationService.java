@@ -17,7 +17,7 @@ public class RegistrationService {
 	}
 
 
-	public List<Patient> getPatient() {
+	public List<User> getUsers() {
 		
 		return registrationRepository.findAll();
 	}
@@ -25,17 +25,24 @@ public class RegistrationService {
 	* Checks for Transactions, if not available creates a new transaction
   */
 	@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED )
-	public void savePatient(Patient patient) {
-		registrationRepository.save(patient);
+	public void saveUser(User user) {
+		registrationRepository.save(user);
 	}
 	
 	/**
 	* Checks for Transactions, If existing available, uses the existing one OR if not available execution with out transaction
   */
 	@Transactional(propagation = Propagation.SUPPORTES, isolation = Isolation.READ_COMMITTED , noRollbackForClassName = {"NullpointerException"})
-	public void savePatientContacts(Patient patient) {
-		registrationRepository.save(patient);
+	public void saveUserContacts(User user) {
+		registrationRepository.save(user);
 	}
+
+
+
+
+
+
+	//below code is to refer for tranactions 
 
 	/**
 	* Checks for Transactions, If existing available, uses the existing one OR if not available throws exception 
@@ -68,6 +75,6 @@ public class RegistrationService {
 	@Transactional(propagation = Propagation.NOT_SUPPORTED, isolation = Isolation.SERIALIZABLE )
 	public void saveRubrics(Patient patient) {
 		registrationRepository.save(patient);
-	}
+	} 
 
 }
