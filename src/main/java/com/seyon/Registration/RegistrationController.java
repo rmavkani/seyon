@@ -35,19 +35,19 @@ public class RegistrationController {
 	
 	@PostMapping("/user/save")
 	@PreAuthorize("hasAuthority('patient:write')")
-	public void savePatient(@RequestBody User user) {
-		registrationService.saveUser(user);
+	public void addUser(@RequestBody User user) {
+		registrationService.addUser(user);
 	}
 
 	@PutMapping("/user/update/{id}")
 	@PreAuthorize("hasAuthority('patient:write')")
-	public void savePatient(@RequestParam String id, @RequestBody User user) {
+	public void updateUser(@RequestParam String id, @RequestBody User user) {
 		registrationService.updateUser(user);
 	}
 
 	@DeleteMapping("/user/delete/{id}")
 	@PreAuthorize("hasAuthority('patient:write')")
-	public void savePatient(@RequestParam String id ) {
+	public void deleteUser(@RequestParam String id ) {
 		registrationService.deleteUser(id);
 	}
 	

@@ -25,33 +25,33 @@ public class RegistrationService {
 	* Checks for Transactions, if not available creates a new transaction
   */
 	@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED )
-	public void saveUser(User user) {
+	public void addUser(User user) {
 		registrationRepository.save(user);
 	}
-	
+
 	/**
 	* Checks for Transactions, If existing available, uses the existing one OR if not available execution with out transaction
   */
 	@Transactional(propagation = Propagation.SUPPORTES, isolation = Isolation.READ_COMMITTED , noRollbackForClassName = {"NullpointerException"})
-	public void saveUserContacts(User user) {
-		registrationRepository.save(user);
+	public void deleteUser(Long userId) {
+		registrationRepository.delete(userId);
 	}
-
-
+	
+	/**
+	* Checks for Transactions, If existing available, uses the existing one OR if not available throws exception 
+ 	*/
+	@Transactional(propagation = Propagation.MANDATORY, isolation = Isolation.REPEATABLE_READ, rollbackForClassName = {"NullpointerException"} )
+	public void updateUser(Patient patient) {
+		registrationRepository.save(patient);
+	}
 
 
 
 
 	//below code is to refer for tranactions 
+	
 
-	/**
-	* Checks for Transactions, If existing available, uses the existing one OR if not available throws exception 
- 	*/
-	@Transactional(propagation = Propagation.MANDATORY, isolation = Isolation.REPEATABLE_READ, rollbackForClassName = {"NullpointerException"} )
-	public void saveCaseDetails(Patient patient) {
-		registrationRepository.save(patient);
-	}
-
+	
 	/**
 	* always new tranaction, if existing available, suspense it 
  	*/
